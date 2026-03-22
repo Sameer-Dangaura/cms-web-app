@@ -1,6 +1,10 @@
-# OneLine Shop Ecommerce => CMS (Content Management System) Application
+# 📊 React CMS Dashboard
+
+- OneLine Shop Ecommerce => CMS (Content Management System) Application
 
 - This is CMS application For OnLine Shop Ecommerce using React + TypeScript + Vite. 
+
+- A modern and scalable Content Management System (CMS) built using React. This project allows users to create, manage, and publish content through a clean and user-friendly dashboard.
 
 # React + TypeScript + Vite
 
