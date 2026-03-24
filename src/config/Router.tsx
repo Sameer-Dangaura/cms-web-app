@@ -7,6 +7,7 @@ import NotFound from "../pages/error/NotFound";
 
 // import Dashboard from "../pages/admin/Dashboard";
 import UserList from "../pages/admin/user/UserList";
+import UserRegister from "../pages/admin/user/UserRegister";
 
 import AdminLayout from "../pages/layouts/AdminLayout";
 import AdminDashboard from "../pages/admin/Dashboard";
@@ -21,13 +22,49 @@ const routerData = createBrowserRouter([
         path: "/admin", element: <AdminLayout />, children: [   // This means that when the user navigates to any route that starts with "/admin", the AdminLayout element will be rendered. The children array defines the nested routes that will be rendered inside the AdminLayout component based on the specific path. This is working because of the <Outlet /> component used in the AdminDashboardMain component, which allows the nested routes to be rendered within the AdminLayout.
 
             { index: true, Component: AdminDashboard },   // this will be the default route for the /admin path, so when you navigate to /admin it will render the <AdminLayout /> element and inside that the AdminDashboard component will also be rendered, Where it is inside Dashboard.tsx. The index: true property indicates that this route should be rendered when the parent route ("/admin") is matched exactly.
-            { path: "users", element: <UserList /> },   //  this defines the route for the UserList component under the "/admin" path which is already nested under the "/admin" path. This "users" paths says that when the user navigates to "/admin/users", the UserList component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. Do not use "/admin/users" here because it is already nested under the "/admin" path, so we can just use "users" to define the route for the UserList component. Also, do not use "/users" because it will be treated as an absolute path and will not be nested under the "/admin" path.
 
+            // User listing table :
+            { path: "users", element: <UserList /> },   // this defines the route for the UserList component under the "/admin" path which is already nested under the "/admin" path. This "users" paths says that when the user navigates to "/admin/users", the UserList component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. Do not use "/admin/users" here because it is already nested under the "/admin" path, so we can just use "users" to define the route for the UserList component. Also, do not use "/users" because it will be treated as an absolute path and will not be nested under the "/admin" path.
+
+            // user form  for creating a new user:
+            { path: "user/create", element: <UserRegister /> }  // this defines the route for the UserRegister component under the "/admin" path which is already nested under the "/admin" path. This "user/create" paths says that when the user navigates to "/admin/user/create", the UserRegister component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. Do not use "/admin/user/create" here because it is already nested under the "/admin" path, so we can just use "user/create" to define the route for the UserRegister component. Also, do not use "/user/create" because it will be treated as an absolute path and will not be nested under the "/admin" path.
+
+            // user edit form for editing an existing user:
+
+            // user details page for showing the details of a user:
+
+            // user delete confirmation page for confirming the deletion of a user:
         ]
     },
-
+    // alternative way to define the admin routes without using nested routes:
     // { path: "/admin", element: <Dashboard /> },
     // { path: "/admin/users", element: <UserList /> },
+
+
+    // POS
+    // Product:
+    // product listing page
+    // product create form
+    // product edit form
+    // product details page
+    // product delete confirmation page
+
+    // Order:
+    // order listing page
+    // order details page
+    // order update form
+    // order delete confirmation page
+
+    // Inventory:
+    // Stock listing page
+    // Stock update form
+    // Stock delete confirmation page
+
+    // Transaction:
+    // Transaction listing page
+    // Transaction details page
+    // Transaction delete confirmation page
+
 
 
     // always keep this route at the end of the array, because it will match any URL that does not match the above routes. It is used to handle 404 Not Found errors.
@@ -66,6 +103,7 @@ export default function RouterConfig() {
 
 - <Route></Route> is a component that is used to define a single route in the application. It has two main props: path and element. The path prop defines the URL path that this route will match, and the element prop defines the component that will be rendered when this route is matched. For example, <Route path="/forget-password" Component={ForgetPassword}></Route> means that when the URL is "/forget-password", the ForgetPassword component will be rendered. and <Route path="/" element="{<HomePage />}"></Route> means that when the URL is "/", the HomePage component will be rendered. "/" is the root path of the application, and it will match any URL that starts with "/". Therefore, it is important to place the more specific routes (like "/forget-password") before the less specific routes (like "/") to ensure that the correct component is rendered for each URL.
 import NotFound from './../pages/error/NotFound';
+import UserRegister from './../pages/admin/user/UserRegister';
 
 - `element` prop is used to specify the component that should be rendered when the route is matched. It is a JSX element that represents the component to be rendered. For example, `element={<HomePage />}` means that when the route is matched, the `HomePage` component will be rendered.
 

@@ -1,4 +1,4 @@
-import { type HTMLInputTypeAttribute, type ReactNode } from "react";
+import { type BaseSyntheticEvent, type HTMLInputTypeAttribute, type ReactNode } from "react";
 
 export interface IFormLabelProps {
     htmlFor?: string;
@@ -15,4 +15,18 @@ export interface ITextInputProps {
     name: string;
     className?: string;
     errMsg?: string;
+    handleChange(e: BaseSyntheticEvent): void
 }
+
+
+/*
+ `handleChange(e: BaseSyntheticEvent): void`
+    
+- handleChange is a function that takes an event(e) of type BaseSyntheticEvent as an argument and returns void. BaseSyntheticEvent is a type that represents the synthetic event object that is passed to event handlers in React. It is a wrapper around the native event object and has the same properties and methods as the native event object. It is used to define the type of the event object that is passed to the handleChange function. 
+    
+- Synthetic event object is a cross-browser wrapper around the browser's native event. It has the same interface as the browser's native event, including stopPropagation() and preventDefault(), except the events work identically across all browsers. React implements a synthetic event system that is consistent across all browsers, so you don't have to worry about cross-browser compatibility when using events in React. In simple terms, it is a way to handle events in React that is consistent across all browsers. It is used to define the type of the event object that is passed to the handleChange function.
+    
+- The native event object is the event object that is provided by the browser when an event occurs. It has properties and methods that are specific to the browser and may not be consistent across all browsers. The synthetic event object is a wrapper around the native event object that provides a consistent interface for handling events in React. It is used to define the type of the event object that is passed to the handleChange function. In simple terms, it is a way to handle events in React that is consistent across all browsers. It is used to define the type of the event object that is passed to the handleChange function.
+    
+- In summary, the handleChange function is a function that takes an event object of type BaseSyntheticEvent as an argument and returns void. It is used to handle the change event of the input element in the TextInput component. The BaseSyntheticEvent type is used to define the type of the event object that is passed to the handleChange function, which is a synthetic event object that is consistent across all browsers. 
+*/
