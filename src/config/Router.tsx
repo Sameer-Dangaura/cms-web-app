@@ -26,8 +26,8 @@ const routerData = createBrowserRouter([
             // User listing table :
             { path: "users", element: <UserList /> },   // this defines the route for the UserList component under the "/admin" path which is already nested under the "/admin" path. This "users" paths says that when the user navigates to "/admin/users", the UserList component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. Do not use "/admin/users" here because it is already nested under the "/admin" path, so we can just use "users" to define the route for the UserList component. Also, do not use "/users" because it will be treated as an absolute path and will not be nested under the "/admin" path.
 
-            // user form  for creating a new user:
-            { path: "user/create", element: <UserRegister /> }  // this defines the route for the UserRegister component under the "/admin" path which is already nested under the "/admin" path. This "user/create" paths says that when the user navigates to "/admin/user/create", the UserRegister component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. Do not use "/admin/user/create" here because it is already nested under the "/admin" path, so we can just use "user/create" to define the route for the UserRegister component. Also, do not use "/user/create" because it will be treated as an absolute path and will not be nested under the "/admin" path.
+            // user form  for creating a new user by the admin:
+            { path: "users/create", element: <UserRegister /> }  // this defines the route for the UserRegister component under the "/admin" path which is already nested under the "/admin" path. This "users/create" paths says that when the user navigates to "/admin/users/create", the UserRegister component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. Do not use "/admin/users/create" here because it is already nested under the "/admin" path, so we can just use "users/create" to define the route for the UserRegister component. Also, do not use "/users/create" because it will be treated as an absolute path and will not be nested under the "/admin" path.
 
             // user edit form for editing an existing user:
 
@@ -45,6 +45,8 @@ const routerData = createBrowserRouter([
     // Product:
     // product listing page
     // product create form
+    // - name, description, price, category, brand, code, stock, images,
+    // - createdBy, updatedBy, vendor, sku, status(stock, out of stock, discontinued), etc.
     // product edit form
     // product details page
     // product delete confirmation page

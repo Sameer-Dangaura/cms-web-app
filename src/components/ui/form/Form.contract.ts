@@ -10,11 +10,35 @@ export interface IFormLabelProps {
 children: React.ReactNode; is a type that represents any valid React element, string, number, boolean, null, undefined, or an array of these types. It is used to define the type of the children prop in a React component. The children prop is a special prop that is used to pass the content of a component. It can be of any data type, but it is usually a string or a React element. It is alternatively, we can also import ReactNode from the react package and use it as the type for the children prop. e.g: import { ReactNode } from "react"; and then use it as children: ReactNode in the interface.
 */
 
-export interface ITextInputProps {
-    type: HTMLInputTypeAttribute;
+export interface IBaseType {
     name: string;
     className?: string;
     errMsg?: string;
+}
+
+export interface IFileInputProps extends IBaseType {
+    handleChange(name: string, files: File | Array<File>): void
+}
+
+export interface ITextAreaProps extends IBaseType {
+    rows?: number;
+    handleChange(e: BaseSyntheticEvent): void
+}
+
+export interface ITextInputProps extends IBaseType {
+    type: HTMLInputTypeAttribute;
+    handleChange(e: BaseSyntheticEvent): void
+}
+
+
+
+export interface ISingleOption {
+    label: string;
+    value: string;
+}
+
+export interface ISelectOptionInputProps extends IBaseType {
+    options: Array<ISingleOption>;
     handleChange(e: BaseSyntheticEvent): void
 }
 

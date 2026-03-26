@@ -1,9 +1,9 @@
 import type { IButtonProps } from "./Button.contract"
 
 
-export const Button = ({ className, children }: Readonly<IButtonProps>) => {
+export const Button = ({ type, className, children }: Readonly<IButtonProps>) => {
     return (
-        <button className={` ${className} `}>
+        <button type={type} className={` ${className} `}>
             {children}
         </button>
     )
