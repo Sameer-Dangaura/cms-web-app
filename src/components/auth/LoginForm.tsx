@@ -3,8 +3,21 @@ import { LoginSchema, type ICredential } from './Auth.contract';
 
 import { FormLabel } from './../ui/form/Lable';
 import { TextInput } from './../ui/form/Input';
+import { useForm } from 'react-hook-form';
 
 export default function LoginForm() {
+
+    // Instead of using custom validation for form handling and validation, we can also use react-hook-form which is a library that provides a simple and efficient way to handle form state and validation in React. it allows us to define the form schema and validation rules using a simple API and it also provides a way to handle form submission and reset. we can use the useForm hook to manage the form state and validation. it returns an object with properties such as register, handleSubmit, errors, etc. which we can use to manage the form state and validation. in this case, we are using the defaultValues property to initialize the form state with an object that has two properties, username and password, both of which are set to empty strings. this is because we want to clear the input fields after login or reset.
+    // There are two ways to use react-hook-form for form handling and validation:
+    // 1. Uncontrolled Input component/Using the register method: to register the input fields and handle the form submission using the handleSubmit method. 
+    // 2. Controlled Input component: Using the Controller component to wrap the input fields and handle the form submission using the handleSubmit method.
+    const { } = useForm({
+        defaultValues: {
+            username: "",
+            password: ""
+        }
+    })
+
 
     // Custom validation logic for the login form. we will handle the login logic in the login function which will be called when the form is submitted. we will also handle the input change event to update the state of the credential object when the user types in the input fields. we will also validate the credential object before sending it to the server for authentication.
 

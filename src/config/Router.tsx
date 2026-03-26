@@ -11,11 +11,13 @@ import UserRegister from "../pages/admin/user/UserRegister";
 
 import AdminLayout from "../pages/layouts/AdminLayout";
 import AdminDashboard from "../pages/admin/Dashboard";
+import ResetPassword from "../pages/auth/ResetPassword";
 
 
 const routerData = createBrowserRouter([
     { path: "/", element: <HomePage /> },
     { path: "/forget-password", Component: ForgetPassword },
+    { path: "/reset-password", Component: ResetPassword },
 
     // grouping admin routes together:
     {
