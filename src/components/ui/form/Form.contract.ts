@@ -1,4 +1,5 @@
-import { type BaseSyntheticEvent, type HTMLInputTypeAttribute, type ReactNode } from "react";
+import { type HTMLInputTypeAttribute, type ReactNode } from "react";
+import type { Control, FieldValues, Path } from "react-hook-form";
 
 export interface IFormLabelProps {
     htmlFor?: string;
@@ -11,23 +12,25 @@ children: React.ReactNode; is a type that represents any valid React element, st
 */
 
 export interface IBaseType {
-    name: string;
     className?: string;
     errMsg?: string;
 }
 
-export interface IFileInputProps extends IBaseType {
-    handleChange(name: string, files: File | Array<File>): void
-}
+export interface IFileInputProps<T extends FieldValues> extends IBaseType {
+    name: Path<T>;  // we are using the Path type from react-hook-form to define the type of the name prop in the IFileInputProps interface. this is necessary because we are using react-hook-form to manage the state of the form and we need to define the type of the name prop in order to use it in the FileInput component. the Path type is a generic type that takes a type parameter T which represents the shape of the form data. this way we can ensure that the name prop is of the correct type and we can use it to manage the state of the form in a type-safe way. it is important to note that the name prop is used to identify the input element in the form and it is passed to the FileInput component as a prop. we can use the name prop to register the input element with react-hook-form and manage its state accordingly. in summary, we are using the Path type from react-hook-form to define the type of the name prop in the IFileInputProps interface in order to use it in the FileInput component and manage the state of the form in a type-safe way. 
+    control: Control<T>
+}   // we are using the Control type from react-hook-form to define the type of the control prop in the IFileInputProps interface. this is necessary because we are using react-hook-form to manage the state of the form and we need to define the type of the control prop in order to use it in the FileInput component. the Control type is a generic type that takes a type parameter T which represents the shape of the form data. this way we can ensure that the control prop is of the correct type and we can use it to manage the state of the form in a type-safe way. it is important to note that the control prop is used to manage the state of the form and it is passed to the FileInput component as a prop. we can use the control prop to register the input element with react-hook-form and manage its state accordingly. in summary, we are using the Control type from react-hook-form to define the type of the control prop in the IFileInputProps interface in order to use it in the FileInput component and manage the state of the form in a type-safe way. 
 
-export interface ITextAreaProps extends IBaseType {
+export interface ITextAreaProps<T extends FieldValues> extends IBaseType {
+    name: Path<T>;
     rows?: number;
-    handleChange(e: BaseSyntheticEvent): void
-}
+    control: Control<T>
+}   // we are using the Control type from react-hook-form to define the type of the control prop in the ITextAreaProps interface. this is necessary because we are using react-hook-form to manage the state of the form and we need to define the type of the control prop in order to use it in the TextAreaInput component. the Control type is a generic type that takes a type parameter T which represents the shape of the form data. this way we can ensure that the control prop is of the correct type and we can use it to manage the state of the form in a type-safe way. it is important to note that the control prop is used to manage the state of the form and it is passed to the TextAreaInput component as a prop. we can use the control prop to register the textarea element with react-hook-form and manage its state accordingly. in summary, we are using the Control type from react-hook-form to define the type of the control prop in the ITextAreaProps interface in order to use it in the TextAreaInput component and manage the state of the form in a type-safe way.
 
-export interface ITextInputProps extends IBaseType {
+export interface ITextInputProps<T extends FieldValues> extends IBaseType {
+    name: Path<T>;
     type: HTMLInputTypeAttribute;
-    handleChange(e: BaseSyntheticEvent): void
+    control: Control<T>
 }
 
 
@@ -37,9 +40,10 @@ export interface ISingleOption {
     value: string;
 }
 
-export interface ISelectOptionInputProps extends IBaseType {
+export interface ISelectOptionInputProps<T extends FieldValues> extends IBaseType {
+    name: Path<T>;
     options: Array<ISingleOption>;
-    handleChange(e: BaseSyntheticEvent): void
+    control: Control<T>;
 }
 
 
