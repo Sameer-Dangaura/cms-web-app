@@ -1,64 +1,51 @@
-import { type BaseSyntheticEvent, useState } from "react"
 // import type { ICredential } from "./Auth.contract"
 import { FormLabel } from "../../components/ui/form/Lable"
 import { FileInput, SelectOptionInput, TextAreaInput, TextInput } from "../ui/form/Input"
-import { LoginSchema } from "./Auth.contract"
 import { Button } from "../ui/button/Button"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { RegisterSchema, type IRegisterationCredential } from "./Auth.contract"
 
 
 export default function LoginForm() {
 
-    const [data, setdata] = useState({
-        name: "",
-        email: "",
-        role: "",
-        address: "",
-        phone: "",
-        image: "",
-        options: []
+    const { control, handleSubmit, formState: { errors } } = useForm<IRegisterationCredential>({
+        defaultValues: {
+            name: "",
+            email: "",
+            role: "",
+            gender: "",
+            address: "",
+            phone: "",
+            image: undefined,
+        },
+        resolver: zodResolver(RegisterSchema)
     })
 
-    // console.log(data) 
 
-
-    // We will handle the login logic in the login function which will be called when the form is submitted:
-    const login = async (e: BaseSyntheticEvent) => {
+    const Register = async (credentials: IRegisterationCredential) => {
         try {
-            e.preventDefault() // we are preventing the default behavior of the form submission which is to refresh the page. 
+            // e.preventDefault() // we are preventing the default behavior of the form submission which is to refresh the page. 
 
-            // console.log(credentials) 
+            console.log(credentials) // we are logging the credentials object to the console to check if we are getting the correct values from the form. we can remove this line after we have confirmed that we are getting the correct values from the form.
 
-            //-> Validate:
-            await LoginSchema.parseAsync(data)
+            // we can send the credentials object to the server for authentication using the fetch API or any other library like axios. we can also use the credentials object to update the state of the application and show the user that they have successfully logged in. we can also use the credentials object to store the user's information in the local storage or in a cookie for future use.
+
         } catch (error) {
             console.log(error)
         }
     }
 
 
-    const handleChange = (e: BaseSyntheticEvent) => {
-        // console.log(e.target.value) 
-
-        const { name, value } = e.target
-
-        setdata((prev) => ({ ...prev, [name]: value }))
-    }
-
-
-    const handleFileChange = (name: string, file: File | Array<File>) => {
-
-        setdata((prev) => ({ ...prev, [name]: file }))
-    }
-
-
     return (
         <>
-            <form onSubmit={login} action="" className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit(Register)} action="" className="flex flex-col gap-5">
                 <div className="flex gap-2 w-full">
                     <FormLabel htmlFor="name">Full Name:</FormLabel>
                     <div className="w-2/3 flex flex-col gap-1">
                         <TextInput
-                            handleChange={handleChange}
+                            control={control}
+                            errMsg={errors?.name?.message}
                             type="text"
                             name="name"
                             className="border w-full border-grey-400 shadow bg-white rounded-md p-2"
@@ -70,7 +57,8 @@ export default function LoginForm() {
                     <FormLabel htmlFor="email">Email(Username):</FormLabel>
                     <div className="w-2/3 flex flex-col gap-1">
                         <TextInput
-                            handleChange={handleChange}
+                            control={control}
+                            errMsg={errors?.email?.message}
                             type="email"
                             name="email"
                             className="border w-full border-grey-400 shadow bg-white rounded-md p-2"
@@ -82,11 +70,12 @@ export default function LoginForm() {
                     <FormLabel htmlFor="role">User Role:</FormLabel>
                     <div className="w-2/3 flex flex-col gap-1">
                         <SelectOptionInput
+                            control={control}
+                            errMsg={errors?.role?.message}
                             options={[
                                 { label: "Admin User", value: "admin" },
                                 { label: "User", value: "user" }
                             ]}
-                            handleChange={handleChange}
                             name="role"
                             className="border w-full border-grey-400 shadow bg-white rounded-md p-2"
                         >
@@ -99,12 +88,13 @@ export default function LoginForm() {
                     <FormLabel htmlFor="gender">Gender:</FormLabel>
                     <div className="w-2/3 flex flex-col gap-1">
                         <SelectOptionInput
+                            control={control}
+                            errMsg={errors?.gender?.message}
                             options={[
                                 { label: "Male", value: "male" },
                                 { label: "Female", value: "female" },
                                 { label: "Other", value: "other" }
                             ]}
-                            handleChange={handleChange}
                             name="gender"
                             className="border w-full border-grey-400 shadow bg-white rounded-md p-2"
                         >
@@ -117,7 +107,8 @@ export default function LoginForm() {
                     <FormLabel htmlFor="phone">Phone:</FormLabel>
                     <div className="w-2/3 flex flex-col gap-1">
                         <TextInput
-                            handleChange={handleChange}
+                            control={control}
+                            errMsg={errors?.phone?.message}
                             type="tel"
                             name="phone"
                             className="border w-full border-grey-400 shadow bg-white rounded-md p-2"
@@ -129,7 +120,8 @@ export default function LoginForm() {
                     <FormLabel htmlFor="address">Address:</FormLabel>
                     <div className="w-2/3 flex flex-col gap-1">
                         <TextAreaInput
-                            handleChange={handleChange}
+                            control={control}
+                            errMsg={errors?.address?.message}
                             name="address"
                             className="border w-full border-grey-400 shadow bg-white rounded-md p-2"
                         />
@@ -140,7 +132,8 @@ export default function LoginForm() {
                     <FormLabel htmlFor="image">Image:</FormLabel>
                     <div className="w-2/3 flex flex-col gap-1">
                         <FileInput
-                            handleChange={handleFileChange}
+                            control={control}
+                            errMsg={errors?.image?.message}
                             name="image"
                             className="border w-full border-grey-400 shadow bg-white rounded-md p-2"
                         />
