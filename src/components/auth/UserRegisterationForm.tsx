@@ -17,7 +17,7 @@ export default function LoginForm() {
             gender: "",
             address: "",
             phone: "",
-            image: undefined,
+            // image: undefined,    // remove image in defaultValues because we are using z.any() in the RegisterSchema to allow any type of value for the image property and then using the refine method to validate that the value is an instance of the File object. if we set the default value of the image property to undefined, it will fail the validation because undefined is not an instance of the File object. by removing the image property from the defaultValues object, we can ensure that we are not setting a default value for the image property and we can still validate that the image property is a valid file object before sending it to the server for registration.
         },
         resolver: zodResolver(RegisterSchema)
     })

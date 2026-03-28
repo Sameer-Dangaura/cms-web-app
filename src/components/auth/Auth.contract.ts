@@ -33,5 +33,7 @@ export const RegisterSchema = z.object({
     gender: z.string().min(1, "Gender is required"),
     address: z.string().min(1, "Address is required"),
     phone: z.string().min(1, "Phone is required"),
-    image: z.instanceof(File, { message: "Image is required" }).nonoptional()   // z.instanceof(File) is a method that validates that the value is an instance of the File class. we are using this method to ensure that the image property of the registeration credential object is a file before sending it to the server for registration. In simple terms, we are validating that the image property is a file and is not undefined before sending it to the server for registration.
+    image: z.any().refine(file => file instanceof File, {
+        message: "Image is required",
+    })  // we are using z.any() to allow any type of value for the image property and then using the refine method to validate that the value is an instance of the File object. this way we can ensure that the image property is a valid file object before sending it to the server for registration. we are using this approach because zod does not have a built-in method to validate file objects, so we are using z.any() to allow any type of value and then refining it to ensure that it is a valid file object. file instanceof File is a JavaScript expression that checks if the value of the file variable is an instance of the File object. this is used in the refine method to validate that the value of the image property is a valid file object before sending it to the server for registration.
 })
