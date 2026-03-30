@@ -12,7 +12,7 @@ export default function AdminSidebar() {
                                 <a href="/admin">
                                     <div className="flex items-center gap-3 hover:bg-gray-300 px-5 py-2">
                                         <LuLayoutDashboard />
-                                        <span>Dashboard</span>A
+                                        <span>Dashboard</span>
                                     </div>
                                 </a>
 

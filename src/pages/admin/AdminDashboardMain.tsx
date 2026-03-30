@@ -2,10 +2,22 @@
 import { Outlet } from 'react-router';
 import AdminSidebar from '../../components/ui/sidebar/AdminSidebar';
 export default function AdminDashboardMain() {
+
+    // In a real application, you would get the logged in user information from your authentication context or state management. For this example, we will hardcode a logged in user object. 
+    const loggedInUser = {
+        name: "John Doe",
+        role: "admin" // This can be "admin" or "user"
+    }
+
     return (
         <>
             <div className="flex ">
-                <AdminSidebar />
+
+                {/* we cannot use if...else block in jsx code. Instead of that we have to use conditional operator: */}
+
+                {
+                    (loggedInUser.role === 'admin') ? <AdminSidebar /> : <></>  // This means that if the logged in user is an admin then we will render the AdminSidebar component. Otherwise, we will render an empty fragment.
+                }
                 <main className="w-full bg-gray-50">
                     <section>
 
