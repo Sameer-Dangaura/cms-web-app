@@ -1,7 +1,7 @@
 import { LuLayoutDashboard, LuLogOut, LuMail, LuSettings, LuShoppingBag, LuUsers } from "react-icons/lu";
 
 
-export default function Aside() {
+export default function AdminSidebar() {
     return (
         <>
             <div className="w-60 bg-gray-100 h-screen flex flex-col py-5">
@@ -12,7 +12,7 @@ export default function Aside() {
                                 <a href="/admin">
                                     <div className="flex items-center gap-3 hover:bg-gray-300 px-5 py-2">
                                         <LuLayoutDashboard />
-                                        <span>Dashboard</span>
+                                        <span>Dashboard</span>A
                                     </div>
                                 </a>
 
