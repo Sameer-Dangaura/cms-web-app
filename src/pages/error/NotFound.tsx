@@ -5,13 +5,13 @@ export default function NotFound() {
     return (
         <>
             <div className='w-full flex items-center justify-center flex-col gap-10 p-10'>
-                <H1>404 - Page Not Found</H1>
+                <H1 className='text-blue-100 text-5xl font-bold'>404 - Page Not Found</H1>
 
-                <div className='text-8xl'>
-                    <span className="font-6xl shadow-amber-100">🤯</span>
+                <div className='flex items-center justify-center'>
+                    <span className='text-8xl '>🤯</span>
                 </div>
 
-                <p className='text-xl'>The page you are looking for does not exist.</p>
+                <p className='text-xl shadow-blue-500/50 shadow-lg '>The page you are looking for does not exist.</p>
             </div>
         </>
     )

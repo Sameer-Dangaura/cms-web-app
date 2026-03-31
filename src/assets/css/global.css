@@ -1,1 +1,8 @@
 @import "tailwindcss";
+/* This is the main CSS file for our application. We are importing the Tailwind CSS library here. This will allow us to use Tailwind CSS classes in our components. You can also add your custom global styles in this file. For example, you can set a global font family or background color. */
+
+
+.active {
+    background-color: #BAE6FD;
+    /* This is the background color for the active link. You can change this to any color you like. */
+}

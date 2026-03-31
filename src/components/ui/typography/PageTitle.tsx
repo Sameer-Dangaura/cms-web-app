@@ -13,11 +13,11 @@ import { type IH1Props } from "./PageTitle.contract";
 
 
 // export const H1 = (props: Readonly<IH1Props>) => {
-export const H1 = ({ className = "text-blue-100 text-5xl", children }: Readonly<IH1Props>) => {
+export const H1 = ({ className = "text-blue-100 text-5xl font-semibold", children }: Readonly<IH1Props>) => {
     // object data type
     // state -> hook
     // {props.children} -> children is a special property that is used to pass the content of a component
-    return <h1 className={`${className} font-semibold`}>
+    return <h1 className={`${className}`}>
         {children}
     </h1>;
 }

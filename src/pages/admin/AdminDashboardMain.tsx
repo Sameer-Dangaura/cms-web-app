@@ -13,11 +13,7 @@ export default function AdminDashboardMain() {
         <>
             <div className="flex ">
 
-                {/* we cannot use if...else block in jsx code. Instead of that we have to use conditional operator: */}
-
-                {
-                    (loggedInUser.role === 'admin') ? <AdminSidebar /> : <></>  // This means that if the logged in user is an admin then we will render the AdminSidebar component. Otherwise, we will render an empty fragment.
-                }
+                <AdminSidebar loggedInUser={loggedInUser} />
                 <main className="w-full bg-gray-50">
                     <section>
 
