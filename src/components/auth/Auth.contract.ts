@@ -15,7 +15,7 @@ export interface IResetCredential {
 
 // This is the schema for the credential object that we will use to validate the credential object before sending it to the server for authentication:
 export const LoginSchema = z.object({
-    username: z.email("Incorrect email format").nonempty().nonoptional(),
+    username: z.string().nonempty().nonoptional(),  // Here, I updated scheme as per API documentation requirement. From `z.email()` to `z.string()`. Because API documentation data shows that username is a string and not an emial.
     password: z.string().nonempty().nonoptional()
 })   // we are using zod to validate the credential object. zod is a TypeScript-first schema declaration and validation library. it is used to define the shape of the data and validate it against the defined schema. in this case, we are defining a schema for the credential object which has two properties, username and password, both of which are of type string and are required. we can use this schema to validate the credential object before sending it to the server for authentication.
 
