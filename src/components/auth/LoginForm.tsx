@@ -4,7 +4,7 @@ import { FormLabel } from './../ui/form/Lable';
 import { TextInput } from './../ui/form/Input';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';  // we are using the zodResolver to validate the credential object using the LoginSchema. the zodResolver is a function that takes a zod schema as an argument and returns a resolver function that can be used to validate the form data against the defined schema. in this case, we are using the LoginSchema which is a zod schema that defines the shape of the credential object and the validation rules for each property. we are using this resolver to validate the form data before sending it to the server for authentication. if the validation fails, it will return an error which we can use to display error messages to the user or to prevent the form submission.
-import { useState } from 'react';
+// import { useState } from 'react';
 
 // import Cookies from 'js-cookie'; // we are using the js-cookie library to set cookies in a more secure way. it provides a simple API to set, get, and delete cookies in the browser. it also provides options to set the expiresIn, path, domain, secure, and HttpOnly flags for the cookies which can help to prevent cross-site scripting (XSS) attacks and other security vulnerabilities. we can use this library to set cookies in a more secure way instead of using the js default method which does not provide any security features.
 
@@ -30,7 +30,10 @@ export default function LoginForm() {
     });
 
 
-
+    // local state management: 
+    // const [loading, setLoading] = useState<boolean>(true);
+    // local state management is not recommended for managing the user session and authentication state in a real application because it does not persist the state across page reloads and it can be easily manipulated by the user. 
+    // Instead, we use global state management using libraries such as redux-toolkit, context API, zustand, jotai, tanstack query (api state) etc. to manage the user session and authentication state in a real application. these libraries provide a way to manage the global state of the application and persist it across page reloads and data share with multiple components. they also provide a way to handle side effects such as API calls and to manage the authentication state in a more secure way. we can use these libraries to manage the user session and authentication state in a real application instead of using local state management which is not recommended for this purpose. 
 
 
 
