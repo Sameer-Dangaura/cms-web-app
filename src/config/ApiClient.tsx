@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_URL,  // we are using environment variable to set the base URL for the API. this way we can easily change the base URL for different environments (development, staging, production) without changing the code. we can set the environment variable in a .env file at the root of our project and it will be automatically loaded by Vite.
@@ -44,6 +45,28 @@ React Component => Service(axios -> intercept) => Internet => Dummyjson API (or 
 // i) Public API: which can be accessed without authentication (e.g., fetching product data, fetching user profiles, etc.)
 // ii) Private API: which requires authentication (e.g., creating a new user, updating user information, etc.). For private APIs, we need to include an authentication token (e.g., JWT) in the headers of the request to access the protected resources on the server. We can use axios interceptors to automatically add the authentication token to the headers of every request that requires authentication, which simplifies our code and ensures that we are consistently including the necessary authentication information in our API requests. 
 
+
+// request interceptor:
+// axiosInstance.interceptors.request.use( callbackFunction, errorFunction )
+
+axiosInstance.interceptors.request.use((config) => {   // config is the request configuration object that will be passed to the callback function. this object contains all the details of the request that is about to be sent to the server, such as the URL, method, headers, data, etc. we can modify this configuration object in the callback function before it is sent to the server.  // this is the callback function that will be called with the request configuration object before the request is sent. we can modify the request configuration (e.g., by adding headers) and then return the modified configuration object, which will be used for the actual request. for example, we can add an authentication token to the headers of every request like this:
+    console.log("I'm in the request interceptor");  // we are logging a message to the console to indicate that we are in the request interceptor. this can be helpful for debugging purposes to confirm that the interceptor is being executed before the request is sent to the server.
+    console.log("Request Interceptor: ", config);  // we are logging the request configuration object to the console for debugging purposes. this allows us to see the details of the request that is about to be sent to the server, which can be helpful for troubleshooting issues with our API requests and ensuring that the request is being configured correctly before it is sent.
+
+    const token = Cookies.get("auth_key");  // we are getting the authentication token from cookies storage. this assumes that we have previously stored the token in cookies storage after a successful login. we can replace "auth_key" with the actual key that we used to store the token in cookies storage.
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;   // if the token exists, we are adding it to the Authorization header of the request. we are using the Bearer authentication scheme, which is a common way to include JWT tokens in the headers of API requests. this means that the server will expect the token to be included in the Authorization header and will use it to authenticate the request and determine if the user has access to the requested resource. by adding the token to the headers of every request, we can ensure that our application is consistently including the necessary authentication information when making API requests to private endpoints on the server.
+    }
+    return config;
+
+});  // we can use this method to add a request interceptor to our axios instance. this allows us to intercept requests before they are sent to the server and modify them as needed (e.g., adding authentication tokens, logging request details, etc.). we can pass a function as an argument to this method that will be called with the request configuration object before the request is sent. this function can modify the request configuration (e.g., by adding headers) and then return the modified configuration object, which will be used for the actual request. // axiosInstance is the instance of axios that we created with our custom configuration (base URL, timeout, headers, response type). // `.interceptors` is a property of the axios instance that allows us to add interceptors for requests and responses. // `.request` is a method of the interceptors property that allows us to add a request interceptor. // `.use` is a method of the request interceptors that allows us to specify a function that will be called with the request configuration object before the request is sent. // This function can modify the request configuration (e.g., by adding authentication tokens to the headers) and then return the modified configuration object, which will be used for the actual request. // This is useful for handling common tasks such as adding authentication tokens to every request, logging request details for debugging purposes, or modifying the request in other ways before it is sent to the server.
+
+
+
+// response interceptor:
+// axiosInstance.interceptors.response.use( callbackFunction, errorFunction )
+
+axiosInstance.interceptors.response.use();  // we can use this method to add a response interceptor to our axios instance. this allows us to intercept responses before they are handled by react component and, `then` or, `catch` and modify them as needed (e.g., handling errors globally, logging response details, etc.). we can pass a function as an argument to this method that will be called with the response object before it is handled by react component and, `then` or, `catch`. this function can modify the response (e.g., by checking for specific error codes) and then return the modified response object, which will be used for the actual response handling in our code.
 
 
 
