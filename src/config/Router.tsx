@@ -21,6 +21,9 @@ const routerData = createBrowserRouter([
     { path: "/forget-password", Component: ForgetPassword },
     { path: "/reset-password", Component: ResetPassword },
 
+    { path: "/moderator", Component: AdminLayout },
+    { path: "/user", Component: AdminLayout },
+
     // grouping admin routes together:
     {
         path: "/admin", element: <AdminLayout />, children: [   // This means that when the user navigates to any route that starts with "/admin", the AdminLayout element will be rendered. The children array defines the nested routes that will be rendered inside the AdminLayout component based on the specific path. This is working because of the <Outlet /> component used in the AdminDashboardMain component, which allows the nested routes to be rendered within the AdminLayout.
