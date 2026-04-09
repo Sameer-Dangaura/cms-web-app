@@ -60,3 +60,31 @@ export const RegisterSchema = z.object({
         message: "Image is required",
     })  // we are using z.any() to allow any type of value for the image property and then using the refine method to validate that the value is an instance of the File object. this way we can ensure that the image property is a valid file object before sending it to the server for registration. we are using this approach because zod does not have a built-in method to validate file objects, so we are using z.any() to allow any type of value and then refining it to ensure that it is a valid file object. file instanceof File is a JavaScript expression that checks if the value of the file variable is an instance of the File object. this is used in the refine method to validate that the value of the image property is a valid file object before sending it to the server for registration.
 })
+
+
+export interface IUserDetail {
+    "id": number | string;
+    "firstName": string;
+    "lastName": string;
+    "maidenName": string;
+    "age": number;
+    "gender": string;
+    "email": string;
+    "phone": string;
+    "username": string;
+    "birthDate": string;
+    "image": string;
+    "address": {
+        "address": string;
+        "city": string;
+        "state": string;
+        "stateCode": string;
+        "postalCode": string;
+        "coordinates": {
+            "lat": number;
+            "lng": number;
+        },
+        "country": string;
+    },
+    "role": string;
+}

@@ -1,8 +1,9 @@
 import { LuLayoutDashboard, LuLogOut, LuMail, LuSettings, LuShoppingBag, LuUsers } from "react-icons/lu";
 import { NavLink } from "react-router";
+import type { IUserDetail } from "../../auth/Auth.contract";
 
 
-export default function AdminSidebar({ loggedInUser }) {
+export default function AdminSidebar({ loggedInUser }: Readonly<{ loggedInUser?: IUserDetail }>) {
     return (
         <>
             <div className="w-60 bg-gray-100 h-screen flex flex-col py-5">
