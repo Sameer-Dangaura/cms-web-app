@@ -12,7 +12,19 @@ import { zodResolver } from '@hookform/resolvers/zod';  // we are using the zodR
 import { useNavigate } from 'react-router';
 import { useAuth } from '../../lib/hooks/useAuth';
 
+
+
 export default function LoginForm() {
+
+    // Router fetch to user in LoginForm component: this allows us to navigate to different pages in our application after a successful login. we can use the useNavigate hook from the react-router-dom library to navigate to different pages in our application after a successful login. the useNavigate hook returns a function that we can call to navigate to a different page in our application. we can use this function to navigate to the dashboard or home page after a successful login. this is a common practice to improve the user experience by redirecting the user to the appropriate page after a successful login.
+    const router = useNavigate();
+
+
+    // 
+    // useAuth hook to access the login method from the authentication context. this allows us to manage user authentication state across our application in a clean and organized way. we can use the useAuth hook to access the login method from the authentication context and perform the login logic in our LoginForm component. this is a common practice to manage user authentication state across our application in a clean and organized way. by using the useAuth hook, we can easily access the login method and other authentication-related functionality in any component that needs it, without having to worry about how the context is implemented or how to consume it directly. this makes our code more modular and easier to maintain, as we can change the implementation of the authentication context without having to update all the components that consume it.
+    const { login } = useAuth();
+
+
 
     // Instead of using custom validation for form handling and validation, we can also use react-hook-form which is a library that provides a simple and efficient way to handle form state and validation in React. it allows us to define the form schema and validation rules using a simple API and it also provides a way to handle form submission and reset. we can use the useForm hook to manage the form state and validation. it returns an object with properties such as register, handleSubmit, errors, etc. which we can use to manage the form state and validation. in this case, we are using the defaultValues property to initialize the form state with an object that has two properties, username and password, both of which are set to empty strings. this is because we want to clear the input fields after login or reset.
     // There are two ways to use react-hook-form for form handling and validation:
@@ -41,14 +53,6 @@ export default function LoginForm() {
 
 
 
-
-    // Router fetch to user in LoginForm component: this allows us to navigate to different pages in our application after a successful login. we can use the useNavigate hook from the react-router-dom library to navigate to different pages in our application after a successful login. the useNavigate hook returns a function that we can call to navigate to a different page in our application. we can use this function to navigate to the dashboard or home page after a successful login. this is a common practice to improve the user experience by redirecting the user to the appropriate page after a successful login.
-    const router = useNavigate();
-
-
-    // 
-    // useAuth hook to access the login method from the authentication context. this allows us to manage user authentication state across our application in a clean and organized way. we can use the useAuth hook to access the login method from the authentication context and perform the login logic in our LoginForm component. this is a common practice to manage user authentication state across our application in a clean and organized way. by using the useAuth hook, we can easily access the login method and other authentication-related functionality in any component that needs it, without having to worry about how the context is implemented or how to consume it directly. this makes our code more modular and easier to maintain, as we can change the implementation of the authentication context without having to update all the components that consume it.
-    const { login } = useAuth();
 
     // 3. Handle form submission: to handle the form submission and perform the login logic. we will create a function called login which will be called when the form is submitted. this function will take the event object as an argument and we will use it to prevent the default behavior of the form submission which is to refresh the page. then we will log the credential object to the console to see the current state of the credential object when the form is submitted. then we will validate the credential object using the LoginSchema before sending it to the server for authentication.
     // We will handle the login logic in the login function which will be called when the form is submitted:
