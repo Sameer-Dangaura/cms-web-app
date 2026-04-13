@@ -14,6 +14,8 @@ import AdminDashboard from "../pages/admin/Dashboard";
 import ResetPassword from "../pages/auth/ResetPassword";
 
 import UserDetail from "../pages/admin/user/UserDetail";
+import { Suspense } from "react";
+import Loading from "../components/ui/loading/Loading";
 
 
 const routerData = createBrowserRouter([
@@ -26,7 +28,13 @@ const routerData = createBrowserRouter([
 
     // grouping admin routes together:
     {
-        path: "/admin", element: <AdminLayout />, children: [   // This means that when the user navigates to any route that starts with "/admin", the AdminLayout element will be rendered. The children array defines the nested routes that will be rendered inside the AdminLayout component based on the specific path. This is working because of the <Outlet /> component used in the AdminDashboardMain component, which allows the nested routes to be rendered within the AdminLayout.
+        path: "/admin",
+        element: (
+            <Suspense fallback={<Loading />}>   {/* // we are using the Suspense component from React to wrap the AdminLayout component. The Suspense component is used to handle the loading state of the AdminLayout component while it is being loaded asynchronously. The fallback prop of the Suspense component specifies what should be rendered while the AdminLayout component is being loaded. In this case, we are rendering a Loading component as a fallback, which will show a loading indicator to the user while the AdminLayout component is being loaded. Once the AdminLayout component has finished loading, it will be rendered in place of the Loading component. This approach helps to improve the user experience by providing feedback to the user that something is happening while they wait for the AdminLayout component to load, rather than showing a blank screen or an unresponsive UI. */}
+                <AdminLayout />
+            </Suspense>
+        ),
+        children: [   // This means that when the user navigates to any route that starts with "/admin", the AdminLayout element will be rendered. The children array defines the nested routes that will be rendered inside the AdminLayout component based on the specific path. This is working because of the <Outlet /> component used in the AdminDashboardMain component, which allows the nested routes to be rendered within the AdminLayout.
 
             { index: true, Component: AdminDashboard },   // this will be the default route for the /admin path, so when you navigate to /admin it will render the <AdminLayout /> element and inside that the AdminDashboard component will also be rendered, Where it is inside Dashboard.tsx. The index: true property indicates that this route should be rendered when the parent route ("/admin") is matched exactly.
 
