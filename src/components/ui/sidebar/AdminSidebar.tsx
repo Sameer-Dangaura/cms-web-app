@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 import type { IUserDetail } from "../../auth/Auth.contract";
 
 
-export default function AdminSidebar({ loggedInUser }: Readonly<{ loggedInUser?: IUserDetail }>) {
+export default function AdminSidebar({ loggedInUser }: Readonly<{ loggedInUser: IUserDetail | null }>) {
     return (
         <>
             <div className="w-60 bg-gray-100 h-screen flex flex-col py-5">
