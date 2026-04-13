@@ -3,7 +3,7 @@ import AuthContext from "../AuthContext";
 import type { ICredential, IUserDetail } from "../../components/auth/Auth.contract";
 import Cookies from "js-cookie";
 import axiosInstance from "../../config/ApiClient";
-import { H1 } from "../../components/ui/typography/PageTitle";
+import Loading from "../../components/ui/loading/Loading";
 
 
 export default function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
@@ -77,9 +77,9 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
 
     return authLoading ?    // we are checking the value of authLoading state to determine whether to show a loading indicator or to render the children components wrapped by the AuthContext.Provider. if authLoading is true, it means that the authentication state is currently being loaded or checked, and we want to show a loading indicator (in this case, a simple message "Loading..") to inform the user that the authentication process is in progress. once authLoading becomes false, it means that the authentication state has been determined (either a user is authenticated or not), and we can render the children components wrapped by the AuthContext.Provider, allowing them to access the authentication context and display appropriate UI based on the authentication status of the user. this approach helps to provide a better user experience by showing appropriate loading indicators while we are determining the authentication status of the user.
         (
-            <div className="w-full h-screen flex items-center justify-center">
-                <H1 className="text-blue-200 text-5xl font-bold">Loading...</H1>
-            </div>
+            <section className="w-full h-screen flex items-center justify-center">
+                <Loading />
+            </section>
         ) : (
             <AuthContext.Provider value={{
                 login: login,   // we are providing the login method in the context value so that it can be accessed by any component that consumes the authentication context. this allows us to manage user authentication state across our application in a clean and organized way, and makes it easier to maintain and scale our application as it grows. by providing the login method in the context value, we can ensure that all components that need to perform login operations have access to the same implementation of the login logic, which helps to keep our code consistent and maintainable. // `login: login` 1st `login` is the property name in the context value, and the 2nd `login` is the variable that holds the login function defined in our AuthProvider component. by using this syntax, we are creating a property named `login` in the context value and assigning it the value of the `login` function defined in our AuthProvider component. this allows us to access the login functionality from any component that consumes the authentication context, making it easier to manage user authentication state across our application in a clean and organized way. // we can also use the shorthand syntax `login` instead of `login: login` since the property name and variable name are the same, which makes our code cleaner and more concise. this is a common practice in JavaScript to improve code readability and maintainability.
