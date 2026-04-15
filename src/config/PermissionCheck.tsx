@@ -1,0 +1,17 @@
+import type { ReactNode } from "react";
+import { useAuth } from "../lib/hooks/useAuth";
+import { Navigate } from "react-router";
+
+export default function PermissionCheck({ children, allowedRole }: Readonly<{ children: ReactNode, allowedRole: string }>) {
+
+    const { authUser } = useAuth();
+
+    if (authUser && authUser.role !== allowedRole) {  // we are checking if the authenticated user (authUser) exists and if their role does not match the allowedRole prop passed to the PermissionCheck component. If both conditions are true, it means that the user is authenticated but does not have the necessary permissions to access the content wrapped by the PermissionCheck component. In this case, we are using the Navigate component from react-router to redirect the user to a different route based on their role.     // This is done by constructing the target route using the user's role (authUser.role) and concatenating it with a '/' to form the path. For example, if the user's role is 'admin', they will be redirected to '/admin', and if their role is 'user', they will be redirected to '/user', etc. This approach helps to ensure that users without the necessary permissions are redirected to an appropriate page based on their role, rather than being able to access restricted content. It also provides a better user experience by guiding users to the correct page based on their role and permissions in the application.
+        // The Navigate component allows us to programmatically navigate to a different route in our application, and in this case, we are constructing the target route by concatenating '/' with the user's role (authUser.role). This means that if the user's role is 'admin', they will be redirected to '/admin', and if their role is 'user', they will be redirected to '/user', etc. This approach helps to ensure that users without the necessary permissions are redirected to an appropriate page based on their role, rather than being able to access restricted content.
+        return <Navigate to={'/' + authUser.role} />
+    } else if (!authUser) {
+        return <Navigate to="/" />  // we are checking if there is no authenticated user (authUser is null or undefined). If this condition is true, it means that the user is not authenticated and does not have access to the content wrapped by the PermissionCheck component. In this case, we are using the Navigate component from react-router to redirect the user to the root route ("/"), which is typically the login page or a public landing page in many applications. This ensures that unauthenticated users are redirected to a page where they can log in or access public content, rather than being able to access restricted content without proper authentication.
+    }
+
+    return <>{children}</>  // if the user is authenticated and has the necessary permissions (i.e., their role matches the allowedRole), we simply render the children components wrapped by the PermissionCheck component. This means that the content wrapped by PermissionCheck will only be accessible to users who are authenticated and have the appropriate role, while users without the necessary permissions will be redirected to a different route based on their role. This helps to enforce access control in our application and ensures that users can only access content that they are authorized to view.
+}

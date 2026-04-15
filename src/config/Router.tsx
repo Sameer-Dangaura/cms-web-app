@@ -16,6 +16,10 @@ import ResetPassword from "../pages/auth/ResetPassword";
 import UserDetail from "../pages/admin/user/UserDetail";
 import { Suspense } from "react";
 import Loading from "../components/ui/loading/Loading";
+import PermissionCheck from "./PermissionCheck";
+import UserLayout from "../pages/layouts/UserLayout";
+import UserDashboard from "../pages/user/UserDashboard";
+import UserProfile from "../pages/user/UserProfile";
 
 
 const routerData = createBrowserRouter([
@@ -24,14 +28,30 @@ const routerData = createBrowserRouter([
     { path: "/reset-password", Component: ResetPassword },
 
     { path: "/moderator", Component: AdminLayout },
-    { path: "/user", Component: AdminLayout },
+
+    // grouping user routes together:
+    {
+        path: "/user",
+        element: (
+            <PermissionCheck allowedRole="user">
+                <UserLayout />
+            </PermissionCheck>
+        ),
+        children: [
+            { index: true, element: <UserDashboard /> },
+            { path: "profile", element: <UserProfile /> },
+        ]
+    },
+
 
     // grouping admin routes together:
     {
         path: "/admin",
         element: (
             <Suspense fallback={<Loading />}>   {/* // we are using the Suspense component from React to wrap the AdminLayout component. The Suspense component is used to handle the loading state of the AdminLayout component while it is being loaded asynchronously. The fallback prop of the Suspense component specifies what should be rendered while the AdminLayout component is being loaded. In this case, we are rendering a Loading component as a fallback, which will show a loading indicator to the user while the AdminLayout component is being loaded. Once the AdminLayout component has finished loading, it will be rendered in place of the Loading component. This approach helps to improve the user experience by providing feedback to the user that something is happening while they wait for the AdminLayout component to load, rather than showing a blank screen or an unresponsive UI. */}
-                <AdminLayout />
+                <PermissionCheck allowedRole="admin">   {/* // we are using the PermissionCheck component to wrap the AdminLayout component. The PermissionCheck component is a higher-order component that checks if the authenticated user has the required role (in this case, "admin") to access the AdminLayout component. If the user does not have the required role, they will be redirected to a different route based on their role or to the login page if they are not authenticated. If the user has the required role, they will be allowed to access the AdminLayout component and its nested routes. This approach helps to enforce access control in our application and ensures that only users with the appropriate permissions can access certain parts of the application, such as the admin dashboard. */}
+                    <AdminLayout />
+                </ PermissionCheck>
             </Suspense>
         ),
         children: [   // This means that when the user navigates to any route that starts with "/admin", the AdminLayout element will be rendered. The children array defines the nested routes that will be rendered inside the AdminLayout component based on the specific path. This is working because of the <Outlet /> component used in the AdminDashboardMain component, which allows the nested routes to be rendered within the AdminLayout.
@@ -124,6 +144,8 @@ export default function RouterConfig() {
 - <Route></Route> is a component that is used to define a single route in the application. It has two main props: path and element. The path prop defines the URL path that this route will match, and the element prop defines the component that will be rendered when this route is matched. For example, <Route path="/forget-password" Component={ForgetPassword}></Route> means that when the URL is "/forget-password", the ForgetPassword component will be rendered. and <Route path="/" element="{<HomePage />}"></Route> means that when the URL is "/", the HomePage component will be rendered. "/" is the root path of the application, and it will match any URL that starts with "/". Therefore, it is important to place the more specific routes (like "/forget-password") before the less specific routes (like "/") to ensure that the correct component is rendered for each URL.
 import NotFound from './../pages/error/NotFound';
 import UserRegister from './../pages/admin/user/UserRegister';
+import PermissionCheck from './PermissionCheck';
+import UserLayout from './../pages/layouts/UserLayout';
 
 - `element` prop is used to specify the component that should be rendered when the route is matched. It is a JSX element that represents the component to be rendered. For example, `element={<HomePage />}` means that when the route is matched, the `HomePage` component will be rendered.
 
