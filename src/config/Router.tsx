@@ -1,82 +1,21 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 
-// import { BrowserRouter, createBrowserRouter, Route, Routes } from "react-router";
-import HomePage from "../pages/home/HomePage";
-import ForgetPassword from "../pages/auth/ForgetPassword";
 import NotFound from "../pages/error/NotFound";
 
-// import Dashboard from "../pages/admin/Dashboard";
-import UserList from "../pages/admin/user/UserList";
-import UserRegister from "../pages/admin/user/UserRegister";
-
-import AdminLayout from "../pages/layouts/AdminLayout";
-import AdminDashboard from "../pages/admin/Dashboard";
-import ResetPassword from "../pages/auth/ResetPassword";
-
-import UserDetail from "../pages/admin/user/UserDetail";
-import { Suspense } from "react";
-import Loading from "../components/ui/loading/Loading";
-import PermissionCheck from "./PermissionCheck";
-import UserLayout from "../pages/layouts/UserLayout";
-import UserDashboard from "../pages/user/UserDashboard";
-import UserProfile from "../pages/user/UserProfile";
+import { AdminRouter } from "../lib/router/admin-router";
+import { UserRouter } from "../lib/router/user-router";
+import { PublicRouter } from "../lib/router/public-router";
 
 
 const routerData = createBrowserRouter([
-    { path: "/", element: <HomePage /> },
-    { path: "/forget-password", Component: ForgetPassword },
-    { path: "/reset-password", Component: ResetPassword },
+    ...PublicRouter, // we are using the spread operator to spread the PublicRouter array into the main routerData array. This way, we can keep the public routes organized in a separate file (public-router.tsx) and still include them in the main router configuration. The PublicRouter array contains all the routes that are accessible to the public, such as the home page, forget password page, reset password page, etc. By spreading it into the main routerData array, we ensure that all these public routes are included in our application's routing configuration without having to define them directly in this file. This approach helps to keep our code modular and organized by separating concerns and allowing us to manage public-related routes in a dedicated file.
 
-    { path: "/moderator", Component: AdminLayout },
+    // user route:
+    ...UserRouter,  // we are using the spread operator to spread the UserRouter array into the main routerData array. This way, we can keep the user routes organized in a separate file (user-router.tsx) and still include them in the main router configuration. The UserRouter array contains all the routes related to the user dashboard, such as the dashboard itself and the user profile page. By spreading it into the main routerData array, we ensure that all these user routes are included in our application's routing configuration without having to define them directly in this file. This approach helps to keep our code modular and organized by separating concerns and allowing us to manage user-related routes in a dedicated file.
 
-    // grouping user routes together:
-    {
-        path: "/user",
-        element: (
-            <PermissionCheck allowedRole="user">
-                <UserLayout />
-            </PermissionCheck>
-        ),
-        children: [
-            { index: true, element: <UserDashboard /> },
-            { path: "profile", element: <UserProfile /> },
-        ]
-    },
+    // admin route: 
+    ...AdminRouter, // we are using the spread operator to spread the AdminRouter array into the main routerData array. This way, we can keep the admin routes organized in a separate file (admin-router.tsx) and still include them in the main router configuration. The AdminRouter array contains all the routes related to the admin dashboard, such as the dashboard itself, user listing, user registration, user details, etc. By spreading it into the main routerData array, we ensure that all these admin routes are included in our application's routing configuration without having to define them directly in this file. This approach helps to keep our code modular and organized by separating concerns and allowing us to manage admin-related routes in a dedicated file.
 
-
-    // grouping admin routes together:
-    {
-        path: "/admin",
-        element: (
-            <Suspense fallback={<Loading />}>   {/* // we are using the Suspense component from React to wrap the AdminLayout component. The Suspense component is used to handle the loading state of the AdminLayout component while it is being loaded asynchronously. The fallback prop of the Suspense component specifies what should be rendered while the AdminLayout component is being loaded. In this case, we are rendering a Loading component as a fallback, which will show a loading indicator to the user while the AdminLayout component is being loaded. Once the AdminLayout component has finished loading, it will be rendered in place of the Loading component. This approach helps to improve the user experience by providing feedback to the user that something is happening while they wait for the AdminLayout component to load, rather than showing a blank screen or an unresponsive UI. */}
-                <PermissionCheck allowedRole="admin">   {/* // we are using the PermissionCheck component to wrap the AdminLayout component. The PermissionCheck component is a higher-order component that checks if the authenticated user has the required role (in this case, "admin") to access the AdminLayout component. If the user does not have the required role, they will be redirected to a different route based on their role or to the login page if they are not authenticated. If the user has the required role, they will be allowed to access the AdminLayout component and its nested routes. This approach helps to enforce access control in our application and ensures that only users with the appropriate permissions can access certain parts of the application, such as the admin dashboard. */}
-                    <AdminLayout />
-                </ PermissionCheck>
-            </Suspense>
-        ),
-        children: [   // This means that when the user navigates to any route that starts with "/admin", the AdminLayout element will be rendered. The children array defines the nested routes that will be rendered inside the AdminLayout component based on the specific path. This is working because of the <Outlet /> component used in the AdminDashboardMain component, which allows the nested routes to be rendered within the AdminLayout.
-
-            { index: true, Component: AdminDashboard },   // this will be the default route for the /admin path, so when you navigate to /admin it will render the <AdminLayout /> element and inside that the AdminDashboard component will also be rendered, Where it is inside Dashboard.tsx. The index: true property indicates that this route should be rendered when the parent route ("/admin") is matched exactly.
-
-            // User listing table :
-            { path: "users", element: <UserList /> },   // this defines the route for the UserList component under the "/admin" path which is already nested under the "/admin" path. This "users" paths says that when the user navigates to "/admin/users", the UserList component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. Do not use "/admin/users" here because it is already nested under the "/admin" path, so we can just use "users" to define the route for the UserList component. Also, do not use "/users" because it will be treated as an absolute path and will not be nested under the "/admin" path.
-
-            // user form  for creating a new user by the admin:
-            { path: "users/create", element: <UserRegister /> },  // this defines the route for the UserRegister component under the "/admin" path which is already nested under the "/admin" path. This "users/create" paths says that when the user navigates to "/admin/users/create", the UserRegister component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. Do not use "/admin/users/create" here because it is already nested under the "/admin" path, so we can just use "users/create" to define the route for the UserRegister component. Also, do not use "/users/create" because it will be treated as an absolute path and will not be nested under the "/admin" path.
-
-            // user details page for showing the details of a user:
-            { path: "users/:username/details", element: <UserDetail /> }, // this defines the route for the UserDetail component under the "/admin" path which is already nested under the "/admin" path. This "users/:username/details" paths says that when the user navigates to "/admin/users/:username/details", the UserDetail component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. The ":username" part is a route parameter that can be accessed in the UserDetail component to get the specific user username whose details need to be shown. Do not use "/admin/users/:username/details" here because it is already nested under the "/admin" path, so we can just use "users/:username/details" to define the route for the UserDetail component. Also, do not use "/users/:username/details" because it will be treated as an absolute path and will not be nested under the "/admin" path.                          `:username` is a dynamic URL parameter (a variable inside the URL). It acts like a placeholder that gets replaced by real values. This route will match URLs like: `/admin/users/john/details`, `/admin/users/jane/details`, `/admin/users/bob/details`, etc.               The value of `:username` can be accessed in the component that is rendered for this route (e.g., UserDetail component) using the `useParams` hook from react-router. For example, if the URL is `/admin/users/john/details`, then `useParams` will return an object like `{ username: "john" }`, allowing you to access the specific user username whose details need to be shown.
-
-            // user edit form for editing an existing user:
-            { path: "users/:username/edit", element: <> User edit </> },  // this defines the route for editing a user under the "/admin" path which is already nested under the "/admin" path. This "users/:username/edit" paths says that when the user navigates to "/admin/users/:username/edit", the User edit component will be rendered inside the AdminLayout component, where it is inside AdminDashboardMain.tsx. The ":username" part is a route parameter that can be accessed in the User edit component to get the specific user username that needs to be edited. Do not use "/admin/users/:username/edit" here because it is already nested under the "/admin" path, so we can just use "users/:username/edit" to define the route for editing a user. Also, do not use "/users/:username/edit" because it will be treated as an absolute path and will not be nested under the "/admin" path.                          `:username` is a dynamic URL parameter (a variable inside the URL). It acts like a placeholder that gets replaced by real values. This route will match URLs like: `/admin/users/john/edit`, `/admin/users/jane/edit`, `/admin/users/bob/edit`, etc.               The value of `:username` can be accessed in the component that is rendered for this route (e.g., UserEdit component) using the `useParams` hook from react-router. For example, if the URL is `/admin/users/john/edit`, then `useParams` will return an object like `{ username: "john" }`, allowing you to access the specific user username that needs to be edited.
-
-
-            // user delete confirmation page for confirming the deletion of a user:
-        ]
-    },
-    // alternative way to define the admin routes without using nested routes:
-    // { path: "/admin", element: <Dashboard /> },
-    // { path: "/admin/users", element: <UserList /> },
 
 
     // POS
