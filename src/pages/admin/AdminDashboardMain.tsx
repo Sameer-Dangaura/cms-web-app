@@ -2,6 +2,7 @@
 import { Outlet } from 'react-router';
 import AdminSidebar from '../../components/ui/sidebar/AdminSidebar';
 import { useAuth } from '../../lib/hooks/useAuth';
+import type { IUserDetail } from '../../components/auth/Auth.contract';
 export default function AdminDashboardMain() {
 
     // auth context
@@ -13,7 +14,7 @@ export default function AdminDashboardMain() {
         <>
             <div className="flex ">
 
-                <AdminSidebar loggedInUser={loggedInUser} />
+                <AdminSidebar loggedInUser={loggedInUser as IUserDetail} /> {/* // ``loggedInUser as IUserDetail`` is a TypeScript type assertion that tells the TypeScript compiler to treat the loggedInUser variable as an object of type IUserDetail. This is necessary because the authUser value from the authentication context may be of a more general type (e.g., it could be null or undefined if the user is not authenticated), and we want to ensure that we are passing an object of the correct type (IUserDetail) to the AdminSidebar component. By using this type assertion, we can avoid potential type errors and ensure that the AdminSidebar component receives the expected props for rendering the sidebar with the authenticated user's information. */}
                 <main className="w-full bg-gray-50">
                     <section>
 
