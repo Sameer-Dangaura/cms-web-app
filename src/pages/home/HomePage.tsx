@@ -1,46 +1,30 @@
-// Class Based
-//:
-// Stateful Components
-// 
+import { useEffect, type SetStateAction } from "react";
+import { useOutletContext } from "react-router";
+import LoginForm from "../../components/auth/LoginForm";
+import type { Dispatch, ReactNode } from "react";
 
-import { useEffect } from "react";
-import { useAuth } from "../../lib/hooks/useAuth";
-import { useNavigate } from "react-router";
 
-import LeftSidePanel from "../../components/auth/LeftSidePanel";
-import RightSidePanel from "../../components/auth/RightSidePanel";
-
-// Functional components
-//:
-// Stateless components
-
-// export: default or, named
-
-// HomePage is a higher order component because it is composed of multiple lower order components like LeftSidePanel and RightSidePanel
 export default function HomePage() {
 
-    const { authUser } = useAuth();
-    const navigate = useNavigate();
-
+    const { setPageContent } = useOutletContext<{ setPageContent: Dispatch<SetStateAction<{ pageTitle: string; content: string; formTitle: ReactNode }>> }>(); // this hook is used to access the context provided by the parent route (i.e., AuthLayout in this case). It allows us to get the setPageContent function from the AuthLayout, which we can use to update the page content (like page title, content, form title) based on the current route. This way, we can dynamically change the content of the AuthLayout based on whether we are on the login page, forget password page, or reset password page. 
+    // Defining the type of the context object is important here to ensure that we have proper type checking and autocompletion when we use the setPageContent function in this component. By specifying the type of the context object, we can ensure that we are using the setPageContent function correctly and passing the right type of data to it when we want to update the page content in the AuthLayout. 
+    // Dispatch and SetStateAction are types from React that are used to define the type of the setPageContent function. Dispatch is a type that represents a function that can be used to dispatch an action to update the state, and SetStateAction is a type that represents the type of the action that can be dispatched to update the state. In this case, we are using these types to define the type of the setPageContent function, which is a function that takes an action (which is of type SetStateAction) to update the state of pageContent in the AuthLayout. This ensures that we have proper type checking when we use the setPageContent function in this component.
     useEffect(() => {
+        // console.log(setPageContent); // this will log the context object provided by the AuthLayout, which should contain the setPageContext function. This is useful for debugging to ensure that we are receiving the correct context from the parent route.
 
-        if (authUser && authUser.role) {
-            // i.e. logged in user
-            navigate('/' + authUser.role)   // navigate to the dashboard of the user based on their role (e.g., /admin for admin users, /user for regular users, etc.)
-        }
+        setPageContent({
+            pageTitle: "Welcome To CMS!!!",
+            content: "Welcome to CMS, your central workspace for managing content securely and efficiently. Sign in to access your personalized dashboard, collaborate with your team, and keep projects organized in one place. Stay updated with real-time changes and move your work forward with confidence. We're glad to have you here.",
+            formTitle: "Sign In"
+        })
+    }, [])  // this useEffect will run only once when the component is mounted (i.e., when the user navigates to the home page). It sets the initial page content for the AuthLayout, which includes a welcome message and a prompt to sign in. This ensures that when the user first visits the home page, they see the appropriate content in the AuthLayout. If we navigate to other routes like forget password or reset password, those routes can update the page content accordingly using the same setPageContent function from the context.
 
-    }, [authUser])  // this useEffect will run whenever the authUser state changes. If there is a logged-in user (i.e., authUser is not null) and they have a role defined, it will navigate to the corresponding dashboard based on their role. For example, if the user's role is "admin", it will navigate to "/admin". If the user's role is "user", it will navigate to "/user". This ensures that when a user logs in, they are automatically redirected to the appropriate dashboard based on their role.
 
     return (
         // do always return something from a component, even if it is null or empty div 
 
         <>
-            {/* // <></> is React Fragment: it is a way to group multiple elements without adding an extra node to the DOM */}
-
-            <section className=" bg-gray-50 flex gap-5 h-screen p-5">
-                <LeftSidePanel />   {/* LeftSidePanel is lower order component*/}
-                <RightSidePanel />  {/* RightSidePanel is lower order component*/}
-            </section>
+            <LoginForm />
         </>
     )
 }

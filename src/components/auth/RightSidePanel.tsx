@@ -1,14 +1,14 @@
+import type { ReactNode } from "react";
 import { H1 } from "../ui/typography/PageTitle"
-import LoginForm from './LoginForm';
 
 
-export default function RightSidePanel() {
+export default function RightSidePanel({ children, formTitle }: Readonly<{ children?: ReactNode, formTitle?: ReactNode }>) {
     return (
         <div className="w-2/3 bg-gray-100 rounded-md flex flex-col gap-10 p-10">
             <div className="border-b border-b-blue-900/30 pb-5">
-                <H1 className="text-blue-900 text-5xl">Login Form</H1>
+                <H1 className="text-blue-900 text-5xl">{formTitle}</H1>
             </div>
-            <LoginForm />
+            {children}
         </div>
     )
 }

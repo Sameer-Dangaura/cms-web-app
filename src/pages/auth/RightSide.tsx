@@ -1,23 +1,21 @@
-import { H1 } from "../../components/ui/typography/PageTitle";
+import { NavLink } from "react-router";
 import type { IAuthProps } from "./Auth.contract";
 
 
-export default function RightSide({ children, component: Component }: Readonly<IAuthProps>) {
+export default function RightSide({ component: Component }: Readonly<IAuthProps>) {
     return (
-        <div className="w-2/3 bg-gray-100 rounded-md flex flex-col gap-10 p-10">
-            <div className="border-b border-b-blue-900/30 pb-5">
-                <H1 className="text-blue-900 text-5xl">{children}</H1>
-            </div>
+        <div className="w-full bg-gray-100 rounded-md flex flex-col gap-5">
+
             <Component />
 
             <div className="w-full flex items-center gap-5">
                 <hr className="w-2/3" />
-                <p >Or</p>
+                <p>Or</p>
                 <hr className="w-2/3" />
             </div>
 
             <div className="flex w-full items-center justify-center">
-                <a href="/" className="border p-2 w-full text-center rounded-md hover:bg-blue-50 hover:scale-98">Login</a>
+                <NavLink to="/" className="border p-2 w-full text-center rounded-md hover:bg-blue-50 hover:scale-98">Login</NavLink>
             </div>
         </div>
     )

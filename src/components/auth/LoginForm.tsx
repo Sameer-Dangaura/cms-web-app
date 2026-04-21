@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';  // we are using the zodR
 // import Cookies from 'js-cookie'; // we are using the js-cookie library to set cookies in a more secure way. it provides a simple API to set, get, and delete cookies in the browser. it also provides options to set the expiresIn, path, domain, secure, and HttpOnly flags for the cookies which can help to prevent cross-site scripting (XSS) attacks and other security vulnerabilities. we can use this library to set cookies in a more secure way instead of using the js default method which does not provide any security features.
 
 // import axiosInstance from '../../config/ApiClient';
-import { useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import { useAuth } from '../../lib/hooks/useAuth';
 
 
@@ -108,7 +108,7 @@ export default function LoginForm() {
                     </div>
                 </div>
                 <div className="flex w-full justify-end">
-                    <a href="/forget-password" className="text-blue-400 size-sm cursor-pointer hover:underline hover:scale-95">Forget Password?</a>
+                    <NavLink to="/forget-password" className="text-blue-400 size-sm cursor-pointer hover:underline hover:scale-95">Forget Password?</NavLink>
                 </div>
                 <div className="flex gap-5 w-full ">
                     <button
