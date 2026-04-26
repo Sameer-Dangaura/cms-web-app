@@ -1,10 +1,7 @@
-// import DashboardMain from '../DashboardMain';
-// import Header from '../../../components/common/header/Header';
-// import Footer from './../../../components/common/footer/Footer';
-
 import { LuChevronLeft, LuChevronRight, LuPencil, LuPlus, LuTrash2 } from "react-icons/lu";
 import { H1 } from "../../../components/ui/typography/PageTitle";
 import { NavLink } from "react-router";
+import ShowComponent from "../../../components/auth/AllowAccess";
 
 export default function UserList() {
     return (
@@ -17,9 +14,12 @@ export default function UserList() {
                         <input type="search" className="w-full bg-gray-50 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded-md" placeholder="Search users..." />
 
 
-                        <NavLink to="/admin/users/create" className={'w-50 flex items-center justify-center gap-2 bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition duration-500 hover:scale-96 font-semibold'}>
-                            <LuPlus className="size-5" />Add users
-                        </NavLink>
+                        <ShowComponent role="admin">
+                            <NavLink to="/admin/users/create" className={'w-50 flex items-center justify-center gap-2 bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition duration-500 hover:scale-96 font-semibold'}>
+                                <LuPlus className="size-5" />Add users
+                            </NavLink>
+                        </ShowComponent>
+
                     </div>
                 </div>
 
