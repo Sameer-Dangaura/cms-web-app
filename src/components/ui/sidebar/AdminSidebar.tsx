@@ -19,9 +19,7 @@ export default function AdminSidebar({ loggedInUser }: Readonly<{ loggedInUser: 
                                             <LuLayoutDashboard />
                                             <span>Dashboard</span>
                                         </NavLink>
-                                    </ShowComponent>
 
-                                    <ShowComponent role="admin">
                                         <NavLink to="/admin/users" className="flex items-center gap-3 hover:bg-gray-300 px-5 py-2" end>
                                             <LuUsers />
                                             <span>Users</span>
