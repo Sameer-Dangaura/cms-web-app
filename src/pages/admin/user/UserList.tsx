@@ -36,6 +36,108 @@ export default function UserList() {
                         </thead>
                         <tbody>
                             <tr className="border-b border-b-gray-600/50">
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="flex gap-3 items-center justify-center">
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr className="border-b border-b-gray-600/50">
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="flex gap-3 items-center justify-center">
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr className="border-b border-b-gray-600/50">
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="flex gap-3 items-center justify-center">
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr className="border-b border-b-gray-600/50">
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="flex gap-3 items-center justify-center">
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr className="border-b border-b-gray-600/50">
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                </td>
+                                <td className="text-center py-4 px-4 border border-gray-600/50">
+                                    <div className="flex gap-3 items-center justify-center">
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                            <tr className="border-b border-b-gray-600/50">
                                 <td className="text-center py-2 px-4 border border-gray-600/50">John Doe</td>
                                 <td className="text-center py-2 px-4 border border-gray-600/50">john.doe@example.com</td>
                                 <td className="text-center py-2 px-4 border border-gray-600/50">Admin</td>
@@ -159,5 +261,8 @@ import { LuPencil } from 'react-icons/lu';
 
 - `focus:ring-blue-500` is a Tailwind CSS utility class that sets the color of the focus ring to a specific shade of blue (blue-500) when an element receives focus. This class is typically used in combination with `focus:ring-2` to create a visually distinct focus state for interactive elements like buttons, links, or form inputs. By using this class, you can enhance the accessibility and user experience by providing a clear visual indication of which element is currently focused, especially for keyboard users.
 
-- `transition duration-500` is a Tailwind CSS utility class that applies a transition effect to an element, with a duration of 500 milliseconds. This means that when the element's state changes (such as on hover, focus, or active), the transition will smoothly animate the change over half a second. This can be used to create visually appealing effects, such as changing the background color, scaling the element, or altering its opacity, providing a more engaging user experience. 
+- `transition duration-500` is a Tailwind CSS utility class that applies a transition effect to an element, with a duration of 500 milliseconds. This means that when the element's state changes (such as on hover, focus, or active), the transition will smoothly animate the change over half a second. This can be used to create visually appealing effects, such as changing the background color, scaling the element, or altering its opacity, providing a more engaging user experience.
 */
+
+
+// `animate-pulse`: is a Tailwind CSS utility class that applies a pulsing animation to an element. This animation creates a subtle fade-in and fade-out effect, often used to indicate loading or placeholder content. When applied, the element will continuously transition between a lighter and darker shade, giving the appearance of a "breathing" or "pulsing" effect. This can be particularly useful for skeleton screens or loading states, providing users with a visual cue that content is being loaded or processed.
