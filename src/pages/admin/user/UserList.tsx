@@ -2,6 +2,7 @@ import { LuChevronLeft, LuChevronRight, LuPencil, LuPlus, LuTrash2 } from "react
 import { H1 } from "../../../components/ui/typography/PageTitle";
 import { NavLink } from "react-router";
 import ShowComponent from "../../../components/auth/AllowAccess";
+import { RowSkeleton } from "../../../components/ui/table/Skeleton";
 
 export default function UserList() {
     return (
@@ -35,107 +36,7 @@ export default function UserList() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr className="border-b border-b-gray-600/50">
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="flex gap-3 items-center justify-center">
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr className="border-b border-b-gray-600/50">
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="flex gap-3 items-center justify-center">
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr className="border-b border-b-gray-600/50">
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="flex gap-3 items-center justify-center">
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr className="border-b border-b-gray-600/50">
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="flex gap-3 items-center justify-center">
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr className="border-b border-b-gray-600/50">
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="w-full h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                </td>
-                                <td className="text-center py-4 px-4 border border-gray-600/50">
-                                    <div className="flex gap-3 items-center justify-center">
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                        <div className="w-1/5 h-5 bg-gray-300 rounded-full animate-pulse"></div>
-                                    </div>
-                                </td>
-                            </tr>
-
+                            <RowSkeleton rows={7} cols={5} showAction={true} />
 
                             <tr className="border-b border-b-gray-600/50">
                                 <td className="text-center py-2 px-4 border border-gray-600/50">John Doe</td>
