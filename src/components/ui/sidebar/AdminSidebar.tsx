@@ -7,7 +7,7 @@ import ShowComponent from './../../auth/AllowAccess';
 export default function AdminSidebar({ loggedInUser }: Readonly<{ loggedInUser: IUserDetail }>) {
     return (
         <>
-            <aside className="w-70 min-h-full flex flex-col justify-between bg-gray-100">
+            <aside className="w-70 h-[91vh] sticky top-0 z-0 flex flex-col justify-between bg-gray-100">
                 <div className="flex flex-col py-5">
                     <div>
                         <ul>
