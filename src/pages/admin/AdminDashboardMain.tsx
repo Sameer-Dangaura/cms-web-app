@@ -12,7 +12,7 @@ export default function AdminDashboardMain() {
 
     return (
         <>
-            <div className="flex ">
+            <div className="flex flex-1">
 
                 <AdminSidebar loggedInUser={loggedInUser as IUserDetail} /> {/* // ``loggedInUser as IUserDetail`` is a TypeScript type assertion that tells the TypeScript compiler to treat the loggedInUser variable as an object of type IUserDetail. This is necessary because the authUser value from the authentication context may be of a more general type (e.g., it could be null or undefined if the user is not authenticated), and we want to ensure that we are passing an object of the correct type (IUserDetail) to the AdminSidebar component. By using this type assertion, we can avoid potential type errors and ensure that the AdminSidebar component receives the expected props for rendering the sidebar with the authenticated user's information. */}
                 <main className="w-full bg-gray-50">
@@ -26,3 +26,8 @@ export default function AdminDashboardMain() {
         </>
     )
 }
+
+/*
+`flex-1` makes it fill remaining space after header.
+`flex-1` is a Tailwind CSS utility class that applies the `flex: 1` CSS property to an element. This means that the element will grow to fill the available space in its parent container. In the context of the AdminDashboardMain component, applying `flex-1` to the main container div allows it to expand and take up all the remaining space next to the AdminSidebar. This ensures that the main content area (where the nested routes will be rendered) will always fill the available space, providing a responsive and flexible layout for the admin dashboard. By using `flex-1`, we can create a layout where the sidebar has a fixed width while the main content area adjusts dynamically based on the screen size and available space.
+*/
