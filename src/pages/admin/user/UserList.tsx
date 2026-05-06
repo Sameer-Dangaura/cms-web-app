@@ -119,7 +119,11 @@ export default function UserList() {
                                                         {` ${user.firstName} ${user.lastName} `}
                                                     </div>
                                                 </td>
-                                                <td className="text-center py-2 px-4 border border-gray-600/50">{user.email}</td>
+                                                <td className="text-center py-2 px-4 border border-gray-600/50">
+                                                    <a href={`mailto:${user.email}`} className="text-blue-500 hover:underline">
+                                                        {user.email}
+                                                    </a>
+                                                </td>
                                                 <td className="text-center py-2 px-4 border border-gray-600/50">{ucFirst(user.role)}</td>
                                                 <td className="text-center py-2 px-4 border border-gray-600/50">{ucFirst(user.gender)}</td>
                                                 <td className="text-center py-2 px-4 border border-gray-600/50">
