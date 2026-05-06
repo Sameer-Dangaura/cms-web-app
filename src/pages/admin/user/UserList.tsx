@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import axiosInstance from "../../../config/ApiClient";
 import type { IUserDetail } from "../../../components/auth/Auth.contract";
+import { ucFirst } from "../../../lib/utilities/helpers";
 
 
 // type definition:
@@ -119,8 +120,8 @@ export default function UserList() {
                                                     </div>
                                                 </td>
                                                 <td className="text-center py-2 px-4 border border-gray-600/50">{user.email}</td>
-                                                <td className="text-center py-2 px-4 border border-gray-600/50">{user.role}</td>
-                                                <td className="text-center py-2 px-4 border border-gray-600/50">{user.gender}</td>
+                                                <td className="text-center py-2 px-4 border border-gray-600/50">{ucFirst(user.role)}</td>
+                                                <td className="text-center py-2 px-4 border border-gray-600/50">{ucFirst(user.gender)}</td>
                                                 <td className="text-center py-2 px-4 border border-gray-600/50">
                                                     <div className="flex gap-2 items-center justify-center">
                                                         <NavLink className="bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition duration-500" to={`/admin/users/${user.id}/edit`}>
