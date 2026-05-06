@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import axiosInstance from "../../../config/ApiClient";
 import type { IUserDetail } from "../../../components/auth/Auth.contract";
 import { ucFirst } from "../../../lib/utilities/helpers";
+import { Badge } from "../../../components/ui/badge/Badge";
 
 
 // type definition:
@@ -124,7 +125,11 @@ export default function UserList() {
                                                         {user.email}
                                                     </a>
                                                 </td>
-                                                <td className="text-center py-2 px-4 border border-gray-600/50">{ucFirst(user.role)}</td>
+                                                <td className="text-center py-2 px-4 border border-gray-600/50">
+                                                    <Badge type={user.role === "admin" ? "success" : (user.role === "moderator" ? "warning" : (user.role === "user" ? "info" : "danger"))} > {/* // The `type` prop of the `Badge` component is being set based on the user's role. If the user's role is "admin", the badge will have a "success" type, which likely corresponds to a green color. If the role is "moderator", it will have a "warning" type, which may correspond to a yellow color. If the role is "user", it will have an "info" type, which could correspond to a blue color. For any other role, it defaults to a "danger" type, which may correspond to a red color. This conditional logic allows for visually distinguishing users based on their roles using different badge styles. */}
+                                                        {ucFirst(user.role)}    {/* // The `ucFirst` function is used to capitalize the first letter of the user's role before displaying it in the badge. This ensures that the role is presented in a more readable and visually appealing format (e.g., "Admin" instead of "admin"). By using this helper function, we can enhance the user interface by providing a consistent and polished display of user roles in the badge component. */}
+                                                    </Badge>
+                                                </td>
                                                 <td className="text-center py-2 px-4 border border-gray-600/50">{ucFirst(user.gender)}</td>
                                                 <td className="text-center py-2 px-4 border border-gray-600/50">
                                                     <div className="flex gap-2 items-center justify-center">
