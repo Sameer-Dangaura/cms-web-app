@@ -156,21 +156,15 @@ export default function UserList() {
                         <li className="p-0.5 bg-gray-50 size-7 hover:cursor-pointer hover:bg-gray-100 flex items-center justify-center rounded-md shadow ">
                             <LuChevronLeft />
                         </li>
-                        <li className="p-0.5 bg-gray-50 size-7 hover:cursor-pointer hover:bg-gray-100 flex items-center justify-center rounded-md shadow ">
-                            <span>1</span>
-                        </li>
-                        <li className="p-0.5 bg-gray-50 size-7 hover:cursor-pointer hover:bg-gray-100 flex items-center justify-center rounded-md shadow ">
-                            <span>2</span>
-                        </li>
-                        <li className="p-0.5 bg-gray-50 size-7 hover:cursor-pointer hover:bg-gray-100 flex items-center justify-center rounded-md shadow ">
-                            <span>3</span>
-                        </li>
-                        <li className="p-0.5 bg-gray-50 size-7 hover:cursor-pointer hover:bg-gray-100 flex items-center justify-center rounded-md shadow ">
-                            <span>4</span>
-                        </li>
-                        <li className="p-0.5 bg-gray-50 size-7 hover:cursor-pointer hover:bg-gray-100 flex items-center justify-center rounded-md shadow ">
-                            <span>5</span>
-                        </li>
+                        {
+                            // The code snippet `[...Array(pagination.totalNoOfPages)].map((_, i: number) => ( ... ))` is used to create an array of a specific length based on the total number of pages (`pagination.totalNoOfPages`) and then map over that array to render pagination controls. The `Array(pagination.totalNoOfPages)` creates an array with a length equal to the total number of pages, and the spread operator `...` is used to convert it into an actual array that can be mapped over. The `map` function takes each element (which is ignored with `_`) and its index `i`, and returns a list item (`<li>`) for each page number. This allows us to dynamically generate pagination buttons based on the total number of pages available, providing users with the ability to navigate through different pages of the user list.
+                            [...Array(pagination.totalNoOfPages)].map((_, i: number) => (
+                                <li className={`p-0.5 size-7 hover:cursor-pointer hover:bg-gray-100 flex items-center justify-center rounded-md shadow ${i === 0 ? 'bg-blue-100' : 'bg-gray-50'}`} key={i}> {/* // The `key` prop is used to uniquely identify each pagination button in the list. In this case, we are using the index `i` from the `map` function as the key. This helps React to efficiently update and manage the list of pagination buttons when the component re-renders, ensuring that each button is correctly identified and updated based on user interactions or changes in the pagination state. By providing a unique key for each element in the list, we can improve performance and avoid potential issues with rendering and updating the pagination controls. */}
+                                    <span>{i + 1}</span>
+                                </li>
+                            ))
+                        }
+
                         <li className="p-0.5 bg-gray-50 size-7 hover:cursor-pointer hover:bg-gray-100 flex items-center justify-center rounded-md shadow ">
                             <LuChevronRight />
                         </li>
