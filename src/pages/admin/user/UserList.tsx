@@ -29,6 +29,9 @@ export interface IPaginationType {
 
 export default function UserList() {
     // Manage user listing:
+
+    const [keyword, setKeyword] = useState<string>(''); // The `keyword` state variable is used to store the current search term entered by the user in the search input field. It is initialized as an empty string, indicating that there is no search term when the component first mounts. As the user types into the search input, the `onChange` event handler updates this state with the current value of the input field. This allows us to keep track of the user's input in real-time and use it to filter or search through the list of users based on the entered keyword. By managing this state, we can implement a dynamic search functionality that responds to user input and provides a more interactive and responsive user experience when browsing through the user list.
+
     const [loading, setLoading] = useState<boolean>(true);  // The `loading` state variable is used to track whether the user data is currently being fetched from the server. It is initialized to `true`, indicating that the data is being loaded when the component first mounts. This state can be used to conditionally render a loading indicator (such as a skeleton screen) while the data is being fetched, and then display the actual user list once the data has been successfully retrieved. By managing this state, we can provide a better user experience by giving visual feedback during the data fetching process.
 
     const [users, setUsers] = useState<Array<IUserDetail> | null>(null);  // The `users` state variable is used to store the list of user details fetched from the server. It is initialized to `null`, indicating that there are no users loaded when the component first mounts. Once the data is successfully fetched, this state will be updated with an array of user details (of type `IUserDetail`), allowing the component to render the user list in the UI. By managing this state, we can ensure that the component re-renders with the new data once it is available, providing a dynamic and responsive user interface.
@@ -74,6 +77,34 @@ export default function UserList() {
         }
     }
 
+    const searchUsers = async (page = 1, search = '') => {
+        try {
+            // 'https://dummyjson.com/users/search?q=John' is an API endpoint that allows you to search for users based on a query parameter `q`. In this case, we are using the `/users/search` endpoint and passing the search keyword as a query parameter in the `params` object of the axios request. The `q` parameter is used by the server to filter the user data based on the search term provided by the user. By using this endpoint, we can implement a search functionality that allows users to find specific users in the list based on their input, enhancing the user experience by providing a way to quickly locate relevant user information.
+            const response = await axiosInstance.get('/users/search', {
+                params: {   // The `params` object is used to specify query parameters that will be appended to the URL when making the GET request to the search endpoint. In this case, we are sending the `q` parameter, which contains the search keyword entered by the user. This allows the server to filter the user data based on the search term and return only the relevant results that match the query. By using this parameter, we can implement a dynamic search functionality that responds to user input and provides a more interactive and responsive user experience when searching through the user list.
+                    q: search
+                }
+            }) as IUserListResponse;  // The response from the API request is being cast to the `IUserListResponse` type, which we defined earlier. This type includes properties such as `limit`, `skip`, `total`, and `users`, where `users` is an array of user details of type `IUserDetail`. By casting the response to this type, we can ensure that we have a clear structure for the data we are working with, making it easier to access and manipulate the user information in our component. This also helps with TypeScript's type checking, providing better code safety and autocompletion features when working with the response data.
+
+            console.log("Users fetched:", response); // This line is commented out, but if it were active, it would log the response from the API request to the console. This can be useful for debugging purposes, allowing developers to see the structure of the data being returned and verify that the API request is working as expected. The response object typically contains information such as the status of the request, headers, and the actual data payload (in this case, the list of users). By inspecting this logged information, developers can ensure that they are receiving the correct data and can troubleshoot any issues that may arise during the data fetching process.
+
+            setUsers(response.users);   // The `setUsers` function is called with the `users` property from the API response to update the `users` state variable. This allows the component to re-render with the new user data, enabling us to display the list of users in the UI. By updating the state with the fetched user data, we can ensure that our component reflects the most current information retrieved from the server, providing a dynamic and responsive user experience.
+
+            setPagination({
+                limit: +response.limit,
+                skip: +response.limit,
+                total: +response.total,
+                totalNoOfPages: Math.ceil(+response.total / +response.limit),
+                currentPage: page
+            })  // The `setPagination` function is called with an object that updates the pagination state based on the API response. The `limit`, `skip`, and `total` properties are set using the corresponding values from the response, ensuring that the pagination state reflects the current data being fetched. The `totalNoOfPages` is calculated by dividing the total number of users by the limit and rounding up to the nearest whole number using `Math.ceil`, which gives us the total number of pages needed for pagination. The `currentPage` is set to the page number that was passed as an argument to the `getAllUsers` function, allowing us to keep track of which page is currently active in the pagination controls. By updating the pagination state with this information, we can effectively manage the pagination logic in our component and provide accurate navigation controls for users to browse through different pages of the user list.
+        } catch (error) {
+            console.log("Error fetching users:", error);
+            toast.error("Failed to fetch users. Please try again later.");  // The `toast.error` function is used to display an error notification to the user when the API request to fetch users fails. It takes a string message as an argument, which in this case is "Failed to fetch users. Please try again later." This message will be shown in a toast notification, providing feedback to the user about the failure of the data fetching process. By using toast notifications, we can enhance the user experience by giving immediate and clear feedback about the status of their actions or any issues that may arise.
+        } finally {
+            setLoading(false);  // The `finally` block is used to ensure that the `setLoading(false)` function is called regardless of whether the API request was successful or if an error occurred. This means that once the data fetching process is complete (either successfully or with an error), the `loading` state will be set to `false`, allowing the component to update and render the appropriate content (such as the user list or an error message) based on the new state. This helps to ensure that the loading indicator is removed and the user interface is updated correctly after the data fetching process is finished.
+        }
+    }
+
     const handleNextPageChange = async (page = 1) => {  // The `handleNextPageChange` function is an asynchronous function that is called when the user interacts with the pagination controls to change the page. It takes an optional `page` parameter, which defaults to 1 if not provided. This function is responsible for calculating the new `skip` value based on the selected page and then calling the `getAllUsers` function to fetch the appropriate set of users for that page. By updating the pagination state and fetching new data, this function allows users to navigate through different pages of the user list seamlessly.
         const skip = (page - 1) * pagination.limit;  // The `skip` variable is calculated based on the current page number and the limit of users per page. It is determined by multiplying the page number minus one by the limit. For example, if we are on page 1, `skip` will be 0 (since (1 - 1) * limit = 0), meaning no records are skipped and we fetch the first set of users. If we move to page 2, `skip` will be equal to the limit (since (2 - 1) * limit = limit), meaning the first set of users is skipped and we fetch the next set of users. This calculation allows us to control which subset of user data is retrieved from the server based on the current page, enabling effective pagination in our user list.
 
@@ -83,6 +114,13 @@ export default function UserList() {
 
         await getAllUsers(pagination.limit, skip, page);  // The `getAllUsers` function is called with the current `limit`, the newly calculated `skip` value, and the selected `page` number as arguments. This function will fetch the appropriate set of users from the server based on the pagination parameters. By awaiting this function call, we ensure that the component waits for the data fetching process to complete before proceeding, allowing us to update the UI with the new user data once it is available. This is essential for implementing pagination effectively, as it allows users to navigate through different pages of the user list and see the corresponding data for each page.
     }
+
+    useEffect(() => {
+        // data fetch on keyword change:
+        if (keyword !== undefined && keyword !== '') {   // The condition `keyword !== undefined && keyword !== ''` is used to check if the `keyword` state variable is not undefined and not an empty string. This ensures that the search function is only called when there is a valid keyword to search for, preventing unnecessary API calls when the keyword is empty or undefined. If the condition is met, the `searchUsers` function is called with the current pagination parameters and the new search keyword, allowing us to fetch and display the filtered list of users based on the search term entered by the user.
+            searchUsers(1, keyword);
+        }
+    }, [keyword])   // The `useEffect` hook is used to perform side effects in a React component. In this case, it is set up to run whenever the `keyword` state variable changes. This means that whenever the user types into the search input and updates the `keyword`, the `searchUsers` function will be called with the current pagination parameters and the new search keyword. This allows us to implement a dynamic search functionality, where the user list is filtered based on the entered keyword in real-time. By including `keyword` in the dependency array of the `useEffect`, we ensure that the search function is triggered every time the search term changes, providing an interactive and responsive user experience.
 
     useEffect(() => {
         getAllUsers();
@@ -99,7 +137,12 @@ export default function UserList() {
                     <H1 className="text-3xl text-blue-900 font-bold">User List</H1>
 
                     <div className="w-1/3 flex items-center gap-3">
-                        <input type="search" className="w-full bg-gray-50 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded-md" placeholder="Search users..." />
+                        <input type="search"
+                            className="w-full bg-gray-50 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 p-1 rounded-md"
+                            placeholder="Search users..."
+                            value={keyword} // The `value` prop of the input field is set to the `keyword` state variable, which allows the input to be a controlled component. This means that the value displayed in the input field is always in sync with the `keyword` state. As the user types into the search input, the `onChange` event handler updates the `keyword` state with the current value of the input, ensuring that any changes made by the user are reflected in the component's state. This setup is essential for implementing features like search functionality, where you can use the `keyword` state to filter or search through the list of users based on the user's input.
+                            onChange={(e) => setKeyword(e.target.value)}    // The `onChange` event handler is attached to the search input field to update the `keyword` state variable whenever the user types into the input. The event handler takes the event object `e` as an argument and calls the `setKeyword` function with the current value of the input field (`e.target.value`). This allows us to keep track of the user's input in real-time, enabling features such as live search or filtering of the user list based on the entered keyword. By updating the state with each change in the input, we can ensure that our component responds dynamically to user interactions and provides a seamless search experience.
+                        />
 
 
                         <ShowComponent role="admin">
@@ -128,7 +171,7 @@ export default function UserList() {
                                 loading ? (<RowSkeleton rows={10} cols={5} showAction={true} />) : (
                                     users && users.map((user: IUserDetail, i: number) => {
                                         return (
-                                            <tr key={i} className="border-b border-b-gray-600/50">  {/* // The `key` prop is used to uniquely identify each row in the list of users being rendered. In this case, we are using the index `i` from the `map` function as the key. However, it is generally recommended to use a unique identifier from the data itself (such as `user.id`) instead of the index for better performance and to avoid potential issues with reordering or adding/removing items in the list. */}
+                                            <tr key={i} className="border-b border-b-gray-600/50">{/* // The `key` prop is used to uniquely identify each row in the list of users being rendered. In this case, we are using the index `i` from the `map` function as the key. However, it is generally recommended to use a unique identifier from the data itself (such as `user.id`) instead of the index for better performance and to avoid potential issues with reordering or adding/removing items in the list. */}
                                                 <td className="text-center py-2 px-4 border border-gray-600/50">
                                                     <div className="flex gap-3 items-center w-full">
                                                         <img src={user.image} alt="user image" className="size-10 rounded-full" />
