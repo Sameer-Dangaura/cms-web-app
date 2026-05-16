@@ -116,10 +116,16 @@ export default function UserList() {
     }
 
     useEffect(() => {
-        // data fetch on keyword change:
-        if (keyword !== undefined && keyword !== '') {   // The condition `keyword !== undefined && keyword !== ''` is used to check if the `keyword` state variable is not undefined and not an empty string. This ensures that the search function is only called when there is a valid keyword to search for, preventing unnecessary API calls when the keyword is empty or undefined. If the condition is met, the `searchUsers` function is called with the current pagination parameters and the new search keyword, allowing us to fetch and display the filtered list of users based on the search term entered by the user.
-            searchUsers(1, keyword);
-        }
+        // debouncing the search input: means that we are adding a delay before making the API call to search for users based on the keyword entered by the user. This is done to prevent making an API call on every keystroke, which can lead to performance issues and unnecessary network requests. By using `setTimeout`, we can wait for a short period (in this case, 500 milliseconds) after the user stops typing before triggering the search function. If the user types again within that time frame, the previous timeout will be cleared, and a new one will be set, effectively debouncing the input and ensuring that the search function is only called when the user has finished typing.
+
+        const timeout = setTimeout(() => {
+            // data fetch on keyword change:
+            if (keyword !== undefined && keyword !== '') {   // The condition `keyword !== undefined && keyword !== ''` is used to check if the `keyword` state variable is not undefined and not an empty string. This ensures that the search function is only called when there is a valid keyword to search for, preventing unnecessary API calls when the keyword is empty or undefined. If the condition is met, the `searchUsers` function is called with the current pagination parameters and the new search keyword, allowing us to fetch and display the filtered list of users based on the search term entered by the user.
+                searchUsers(1, keyword);
+            }
+        }, 500);
+        return () => clearTimeout(timeout);  // The `return () => clearTimeout(timeout)` statement is used to clean up the timeout when the component unmounts or when the `keyword` state variable changes. This is important to prevent memory leaks and ensure that the timeout does not continue to run after the component is no longer in use. By clearing the timeout, we can avoid potential issues with multiple timeouts being set if the user types rapidly in the search input, ensuring that only the most recent search term triggers the API call after a short delay (debouncing). This helps to optimize performance and reduce unnecessary API requests while providing a better user experience.
+
     }, [keyword])   // The `useEffect` hook is used to perform side effects in a React component. In this case, it is set up to run whenever the `keyword` state variable changes. This means that whenever the user types into the search input and updates the `keyword`, the `searchUsers` function will be called with the current pagination parameters and the new search keyword. This allows us to implement a dynamic search functionality, where the user list is filtered based on the entered keyword in real-time. By including `keyword` in the dependency array of the `useEffect`, we ensure that the search function is triggered every time the search term changes, providing an interactive and responsive user experience.
 
     useEffect(() => {
